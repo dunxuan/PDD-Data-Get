@@ -7,6 +7,8 @@
 // @match        https://mobile.pinduoduo.com/*
 // @match        https://mobile.yangkeduo.com/*
 // @grant        none
+// @downloadURL https://raw.githubusercontent.com/dunxuan/PDD-Data-Get/refs/heads/main/pdd.js
+// @updateURL https://raw.githubusercontent.com/dunxuan/PDD-Data-Get/refs/heads/main/pdd.js
 // ==/UserScript==
 
 (function () {
