@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         PDD Data Get
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      0.2
 // @description
 // @author       顿玄
 // @match        https://mobile.pinduoduo.com/*
@@ -12,17 +12,24 @@
 (function () {
     'use strict';
 
+    const DOMAINS = ['https://mobile.pinduoduo.com', 'https://mobile.yangkeduo.com'];
+
     // 目标 API 的 URL 前缀数组
-    const API_URL_PREFIXES = [
-        'https://mobile.pinduoduo.com/proxy/api/api/caterham/query/fenlei_gyl_group',
-        'https://mobile.pinduoduo.com/proxy/api/search'
+    const API_PATHS = [
+        '/proxy/api/api/caterham/query/fenlei_gyl_group',
+        '/proxy/api/search'
     ];
+    const API_URL_PREFIXES = DOMAINS.flatMap(domain => API_PATHS.map(path => `${domain}${path}`));
 
     // 目标 HTML 的 URL 前缀数组
-    const RAW_URL_PREFIXES = [
-        'https://mobile.pinduoduo.com/?lastTabItemID=',
-        'https://mobile.pinduoduo.com/search_result.html',
+    const HTML_PATHS = [
+        '/?lastTabItemID=',
+        '/?page_id=',
+        '/search_result.html',
+        '/mall_page.html',
+        '/goods.html'
     ];
+    const RAW_URL_PREFIXES = DOMAINS.flatMap(domain => HTML_PATHS.map(path => `${domain}${path}`));
 
     // 重写 XMLHttpRequest 的 open 方法
     const originalXhrOpen = XMLHttpRequest.prototype.open;
